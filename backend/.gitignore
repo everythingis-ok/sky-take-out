@@ -4,3 +4,6 @@
 *.class
 *Test.java
 **/test/
+
+# Local development configuration (credentials and machine-specific settings)
+sky-server/src/main/resources/application-dev.yml
