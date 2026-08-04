@@ -97,6 +97,8 @@ public class OrderServiceImpl implements OrderService {
         orders.setNumber(String.valueOf(System.currentTimeMillis()));
         orders.setPhone(addressBook.getPhone());
         orders.setConsignee(addressBook.getConsignee());
+        orders.setAddress(addressBook.getProvinceName() + addressBook.getCityName()
+                + addressBook.getDistrictName() + addressBook.getDetail());
         orders.setUserId(userId);
 
         orderMapper.insert(orders);

@@ -55,7 +55,7 @@ public class HttpClientUtil {
             //发送请求
             response = httpClient.execute(httpGet);
 
-            //判断响应状态
+            //判断响应状态，接收有效回显
             if(response.getStatusLine().getStatusCode() == 200){
                 result = EntityUtils.toString(response.getEntity(),"UTF-8");
             }
@@ -63,6 +63,7 @@ public class HttpClientUtil {
             e.printStackTrace();
         }finally {
             try {
+                //关闭资源
                 response.close();
                 httpClient.close();
             } catch (IOException e) {
