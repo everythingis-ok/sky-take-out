@@ -2,6 +2,9 @@ server:
   port: 8080
 
 spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
   profiles:
     active: dev
   main:
@@ -63,4 +66,4 @@ sky:
   shop:
     address: 河南省郑州市新郑市淮海路1号
   baidu:
-     ak: bMx5K8sVHgtppcgNX45djs1jNnbHSHFg
+    ak: bMx5K8sVHgtppcgNX45djs1jNnbHSHFg

@@ -8,7 +8,7 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.LocalVariableTableParameterNameDiscoverer;
+import org.springframework.core.DefaultParameterNameDiscoverer;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.expression.EvaluationContext;
 import org.springframework.expression.Expression;
@@ -71,9 +71,11 @@ public class CacheCleanAspect {
      * 例如 pattern = "'dish_' + #dto.categoryId" 会将方法参数 dto.categoryId 的值拼入
      */
     private String parseSpel(String spel, Method method, Object[] args) {
-        // 获取方法参数名
-        LocalVariableTableParameterNameDiscoverer discoverer =
-                new LocalVariableTableParameterNameDiscoverer();
+        // 使用 DefaultParameterNameDiscoverer，支持多种参数名发现策略
+        // 1. StandardReflectionParameterNameDiscoverer（需要 -parameters 编译参数）
+        // 2. LocalVariableTableParameterNameDiscoverer（需要 debug 信息）
+        // 3. 对 Kotlin 类的支持
+        DefaultParameterNameDiscoverer discoverer = new DefaultParameterNameDiscoverer();
         String[] parameterNames = discoverer.getParameterNames(method);
 
         // 构造 SpEL 上下文
