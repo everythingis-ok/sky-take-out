@@ -61,4 +61,13 @@ public interface OrderMapper {
      */
     @Select("select count(id) from orders where status = #{status}")
     Integer countStatus(Integer status);
+
+    /**
+     * 根据订单时间和订单状态查询时间
+     * @param status
+     * @param orderTime
+     * @return
+     */
+    @Select(" //select * from orders where status =#{status} and order_time < #{orderTime}")
+    List<Orders> getByStatusAndOrderTimeLT(Integer status,LocalDateTime orderTime);
 }
