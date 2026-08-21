@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDate;
 
 @RestController
@@ -89,4 +90,15 @@ public Result<TurnoverReportVO> turnoverStatistics(
         return Result.success(reportService.getSalesTop10(begin, end));
     }
 
+    /**
+     * 导出运营数据表
+     */
+    @GetMapping("/export")
+    @ApiOperation("导出运营数据表")
+    public void export(HttpServletResponse response){
+        // 设置Excel下载响应头
+        response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        response.setHeader("Content-Disposition", "attachment;filename=运营数据报表.xlsx");
+        reportService.exportBusinessData(response);
+    }
 }

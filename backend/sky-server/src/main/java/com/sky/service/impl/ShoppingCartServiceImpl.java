@@ -61,11 +61,13 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
                 shoppingCart.setAmount(dish.getPrice());
 
             }else {
-                //本次添加到购物车的是菜品
+                //本次添加到购物车的是套餐
                 Long setmealId = shoppingCart.getSetmealId();
 
                 Setmeal setmeal = setmealMapper.getById(setmealId);
                 shoppingCart.setName(setmeal.getName());
+                shoppingCart.setImage(setmeal.getImage());
+                shoppingCart.setAmount(setmeal.getPrice());
 
             }
 
